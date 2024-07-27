@@ -1,13 +1,18 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 
-
-const MenuList: React.FC = () => {
+interface MenuListProps {
+    isHover: boolean;
+}
+const MenuList: React.FC<MenuListProps> = ({isHover}) => {
+    const [isHoverIntern, setIsHoverIntern] = useState<boolean>(false); 
     return (
-        <ul>
-           
+        <ul 
+            onMouseEnter={() => setIsHoverIntern(true)}
+            onMouseLeave={() => setIsHoverIntern(false)}
+            className={`h-[100px] w-full absolute transition-all -z-10 bg-black/10 ${isHover || isHoverIntern ? 'block' : '-translate-y-full'}`}>
+            {}
         </ul>
     );
 };
-
 export default MenuList;
