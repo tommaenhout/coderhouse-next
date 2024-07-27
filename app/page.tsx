@@ -3,8 +3,9 @@ import { NextPage } from "next";
 
 const Home : NextPage = () => {
   return (
-    <main className="">
+    <main>
       <Header/>
+      <div className="relative -z-10">hola</div>
     </main>
   );
 }

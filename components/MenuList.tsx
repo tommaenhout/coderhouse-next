@@ -10,7 +10,7 @@ const MenuList: React.FC<MenuListProps> = ({isHover}) => {
         <ul 
             onMouseEnter={() => setIsHoverIntern(true)}
             onMouseLeave={() => setIsHoverIntern(false)}
-            className={`h-[100px] w-full absolute transition-all -z-10 bg-black/10 ${isHover || isHoverIntern ? 'block' : '-translate-y-full'}`}>
+            className={`h-[100px] w-full absolute transition-all z-10  bg-gray-100  ${isHover || isHoverIntern ? 'block' : '-translate-y-full'}`}>
             {}
         </ul>
     );
