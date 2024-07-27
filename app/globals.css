@@ -8,3 +8,16 @@
     text-wrap: balance;
   }
 }
+
+@font-face {
+  font-family: 'zekton-rg';
+  src: url('/fonts/zekton-rg.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+.title {
+  font-family: 'zekton-rg';
+}
+
+
