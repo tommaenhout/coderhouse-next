@@ -1,6 +1,5 @@
 import Link from 'next/link';
-import React, { useState } from 'react';
-
+import React, { useEffect, useState } from 'react';
 
 interface MenuListProps {
     isHover: boolean;
@@ -11,19 +10,36 @@ interface MenuListProps {
 }
 const MenuList: React.FC<MenuListProps> = ({isHover, sublinks}) => {
     const [isHoverIntern, setIsHoverIntern] = useState<boolean>(false); 
+    const [sublinksIntern, setSublinksIntern] = useState<{
+        name: string;
+        link: string;
+    }[]>(sublinks);
+
+    useEffect(() => {
+       if ((isHover || isHoverIntern) && sublinks.length > 0) {
+         setSublinksIntern(sublinks);
+       }
+    }, [isHover, sublinks]);
+
     return (
-        <ul 
-            onMouseEnter={() => setIsHoverIntern(true)}
-            onMouseLeave={() => setIsHoverIntern(false)}
-            className={`h-[100px] w-full absolute transition-all z-10  bg-gray-100  ${isHover || isHoverIntern ? 'block' : '-translate-y-full'}`}>
-            {sublinks.map((sublink, index) => (
-                <li 
-                    key={"sublink - " + index}
-                    className='p-4 hover:bg-gray-200'>
-                    <Link href={sublink.link}>{sublink.name}</Link>
-                </li>
-            ))}
-        </ul>
+        <div
+            onMouseEnter={() => {
+                setIsHoverIntern(true)}}
+            onMouseLeave={() => {
+                setIsHoverIntern(false)}}
+            className={`h-auto w-full absolute transition-all z-10 bg-gray-100  ${isHover || isHoverIntern ? 'flex' : '-translate-y-full'}`}>
+            <ul 
+                className={`flex flex-col w-full`}>
+                {sublinksIntern.map((sublink, index) => (
+                    <Link 
+                        key={"sublink - " + index}
+                        className='p-4 hover:bg-gray-200 cursor-pointer'
+                        href={sublink.link}>
+                            {sublink.name}
+                    </Link>
+                ))}
+            </ul>
+        </div>
     );
 };
 export default MenuList;

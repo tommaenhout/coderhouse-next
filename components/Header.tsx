@@ -4,6 +4,11 @@ import React, { useState } from 'react';
 import MenuList from '@/components/MenuList';
 import { links } from '@/constants/links';
 import { returnSublinks } from '@/utils/helpers';
+import hamburger from '@/public/hamburger.svg';
+import cart from '@/public/cart.svg';
+import close from '@/public/close.svg';
+import Image from 'next/image';
+
 
 
 
@@ -16,16 +21,45 @@ const Header: React.FC = () => {
         isHover: false,
         name: ''
     });
+    const [openMenuMobile, setOpenMenuMobile] = useState<boolean>(false);
 
     return (
         <header className='bg-white '>
+             {/* menu mobile */}
+       
+             <div className={`absolute md:hidden transition-all ${openMenuMobile ? "block" : "-translate-x-full"}  z-30 w-screen h-screen bg-red-100`}>
+                <div className='px-2 py-8'>
+                    <Image 
+                        onClick={() => setOpenMenuMobile(false)}
+                        src={close}
+                        alt="hamburger" 
+                        width={30} 
+                        height={30} 
+                        className='cursor-pointer'/>
+                </div>
+            </div>
             <div className='flex flex-col relative bg-white z-20'>
-                <div className='flex justify-center py-8 relative border-b border-black/15'>
-                    <h1 className='text-4xl title font-black p-4 rounded'>Hardcore Merch Shop</h1>
-                    <div className='text-2xl absolute right-0 inset-y-0 flex items-center bg-red-100'>Logo container</div>
+                <div className='flex justify-start shadow-md gap-x-4 md:gap-x-0 px-2  md:shadow-none md:justify-center py-8 relative border-b border-black/15'>
+                    <Image 
+                        onClick={() => setOpenMenuMobile(true)}
+                        src={hamburger}
+                        alt="hamburger" 
+                        width={30} 
+                        height={30} 
+                        className='md:hidden cursor-pointer'/>
+                    <h1 className='text-4xl hidden md:block title font-black p-4 rounded'>Hardcore Merch Shop</h1>
+                    <h1 className='text-2xl md:hidden title font-black'>HMS</h1>
+                    <div className='md:text-2xl text-base absolute right-0 inset-y-0 flex items-center w-auto md:min-w-[150px] md:justify-center px-2'>
+                        <Image 
+                            src = {cart}
+                            alt="cart"
+                            width={30}
+                            height={30}
+                            className='cursor-pointer'/>
+                    </div>
                 </div>
                 <nav className='shadow-xl border-b-black'>
-                    <ul className='justify-center  flex container max-w-[1000px]'>
+                    <ul className='justify-center hidden  md:flex container max-w-[1000px]'>
                         {links.map((link, index) => (
                         <li 
                             key={"link - " + index}
@@ -41,6 +75,8 @@ const Header: React.FC = () => {
             <MenuList 
                 sublinks={returnSublinks(isHover.name)} 
                 isHover={isHover.isHover}/>
+           
+        
          </header>
     );
 };
