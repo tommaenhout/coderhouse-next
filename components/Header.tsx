@@ -10,9 +10,6 @@ import close from '@/public/close.svg';
 import Image from 'next/image';
 
 
-
-
-
 const Header: React.FC = () => {
     const [isHover , setIsHover] = useState<{
         isHover: boolean;
@@ -22,11 +19,9 @@ const Header: React.FC = () => {
         name: ''
     });
     const [openMenuMobile, setOpenMenuMobile] = useState<boolean>(false);
-
     return (
         <header className='bg-white '>
              {/* menu mobile */}
-       
              <div className={`absolute md:hidden transition-all ${openMenuMobile ? "block" : "-translate-x-full"}  z-30 w-screen h-screen bg-red-100`}>
                 <div className='px-2 py-8'>
                     <Image 
@@ -36,6 +31,26 @@ const Header: React.FC = () => {
                         width={30} 
                         height={30} 
                         className='cursor-pointer'/>
+                    <div>
+                        <ul className='flex flex-col gap-y-4'>
+                            {links.map((link, index) => (
+                                <div 
+                                    key={"link - " + index}
+                                    className='h-full p-4 cursor-pointer'>
+                                    <div>{link.nameToShow}</div>
+                                    <ul className='flex flex-col'>
+                                        {link.sublinks.map((sublink, index) => (
+                                            <Link 
+                                                key={"sublink - " + index}
+                                                className='p-4 hover:bg-gray-200 cursor-pointer'
+                                                href={sublink.link}>{sublink.name}
+                                            </Link>
+                                        ))}
+                                    </ul>
+                                </div>
+                            ))}
+                        </ul>
+                    </div>
                 </div>
             </div>
             <div className='flex flex-col relative bg-white z-20'>
@@ -75,8 +90,6 @@ const Header: React.FC = () => {
             <MenuList 
                 sublinks={returnSublinks(isHover.name)} 
                 isHover={isHover.isHover}/>
-           
-        
          </header>
     );
 };
