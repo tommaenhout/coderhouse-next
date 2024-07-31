@@ -1,4 +1,3 @@
-import { metadata } from "@/app/layout";
 import { Metadata, NextPage } from "next";
 import { Params } from "next/dist/shared/lib/router/utils/route-matcher";
 
@@ -14,7 +13,6 @@ const ClothesPage : NextPage <Params> = ({params}) => {
     return (
         <div>
             <h1>{category} Clothes</h1>
-            {/* Add your content here */}
         </div>
     );
 };
