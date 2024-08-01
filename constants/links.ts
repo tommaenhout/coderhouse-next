@@ -12,11 +12,11 @@ export const links : Link[] = [
             },
             {
                 name: 'Air Max',
-                link: '/clothes/hoodies'
+                link: '/clothes/shoes'
             },
             {
-                name: 'Jackets',
-                link: '/clothes/hoodies'
+                name: 'Bomberjackets',
+                link: '/clothes/bomberjackets'
             },
         ]
     },

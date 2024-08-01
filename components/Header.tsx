@@ -38,7 +38,7 @@ const Header: React.FC = () => {
       <div
         className={`absolute md:hidden transition-all ${
           openMenuMobile ? "block" : "-translate-x-full"
-        }  z-30 w-screen h-screen bg-red-100`}
+        }  z-30 w-screen h-screen bg-white`}
       >
         <div className="px-2 py-8">
           <Image
