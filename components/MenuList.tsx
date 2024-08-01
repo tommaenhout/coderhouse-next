@@ -1,5 +1,7 @@
 import Link from 'next/link';
 import React, { useEffect, useState } from 'react';
+import List from './List';
+import SublinksDesktop from './Navbar/SublinksNavBarDesktop';
 
 interface MenuListProps {
     isHover: boolean;
@@ -23,22 +25,14 @@ const MenuList: React.FC<MenuListProps> = ({isHover, sublinks}) => {
 
     return (
         <div
-            onMouseEnter={() => {
-                setIsHoverIntern(true)}}
-            onMouseLeave={() => {
-                setIsHoverIntern(false)}}
+            onMouseEnter={() => {setIsHoverIntern(true)}}
+            onMouseLeave={() => {setIsHoverIntern(false)}}
             className={`h-auto w-full absolute transition-all z-10 bg-gray-100  ${isHover || isHoverIntern ? 'flex' : '-translate-y-full'}`}>
-            <ul 
-                className={`flex flex-col w-full`}>
-                {sublinksIntern.map((sublink, index) => (
-                    <Link 
-                        key={"sublink - " + index}
-                        className='p-4 hover:bg-gray-200 cursor-pointer'
-                        href={sublink.link}>
-                            {sublink.name}
-                    </Link>
-                ))}
-            </ul>
+                <List 
+                ItemComponent={SublinksDesktop}
+                items={sublinksIntern}
+                sourceName='sublink'
+                className={`flex flex-col w-full`}/>
         </div>
     );
 };

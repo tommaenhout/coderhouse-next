@@ -1,4 +1,6 @@
-export const links = [
+import { Link } from "@/components/Header";
+
+export const links : Link[] = [
     {
         name: 'clothes',
         nameToShow: 'Clothes',
