@@ -10,6 +10,9 @@ import close from "@/public/close.svg";
 import Image from "next/image";
 import List from "./List";
 import LinkNavBarMobile from "./Navbar/LinkNavBarMobile";
+import { setOpenMobile, setIsHover } from "@/app/features/navbarSlice";
+import { useAppDispatch, useAppSelector } from "@/hooks/useRedux";
+import LinkNavbarDesktop from "./Navbar/LinkNavbarDesktop";
 
 export interface Link {
   name: string;
@@ -24,25 +27,20 @@ export interface SubLink {
 }
 
 const Header: React.FC = () => {
-  const [isHover, setIsHover] = useState<{
-    isHover: boolean;
-    name: string;
-  }>({
-    isHover: false,
-    name: "",
-  });
-  const [openMenuMobile, setOpenMenuMobile] = useState<boolean>(false);
+  const { openMobile, isHover } = useAppSelector((state) => state.navbarSlice);
+  const dispatch = useAppDispatch();
+  
   return (
     <header className="bg-white ">
       {/* menu mobile */}
       <div
         className={`absolute md:hidden transition-all ${
-          openMenuMobile ? "block" : "-translate-x-full"
+          openMobile ? "block" : "-translate-x-full"
         }  z-30 w-screen h-screen bg-white`}
       >
         <div className="px-2 py-8">
           <Image
-            onClick={() => setOpenMenuMobile(false)}
+            onClick={()=>dispatch(setOpenMobile(false))}
             src={close}
             alt="hamburger"
             width={30}
@@ -63,7 +61,7 @@ const Header: React.FC = () => {
       <div className="flex flex-col relative bg-white z-20">
         <div className="flex justify-start shadow-md gap-x-4 md:gap-x-0 px-2  md:shadow-none md:justify-center py-8 relative border-b border-black/15">
           <Image
-            onClick={() => setOpenMenuMobile(true)}
+            onClick={() => dispatch(setOpenMobile(true))}
             src={hamburger}
             alt="hamburger"
             width={30}
@@ -84,23 +82,14 @@ const Header: React.FC = () => {
             />
           </div>
         </div>
-
+        {/* menu desktop */}
         <nav className="shadow-xl border-b-black">
-          <ul className="justify-center hidden  md:flex container max-w-[1000px]">
-            {links.map((link, index) => (
-              <li
-                key={"link - " + index}
-                onMouseEnter={() =>
-                  setIsHover({ isHover: true, name: link.name })
-                }
-                onMouseLeave={() => 
-                  setIsHover({ isHover: false, name: "" })}
-                className="hover:underline h-full p-4 cursor-pointer"
-              >
-                <Link href={link.link}>{link.nameToShow}</Link>
-              </li>
-            ))}
-          </ul>
+          <List
+              items={links}
+              sourceName="link"
+              ItemComponent={LinkNavbarDesktop}
+              className="justify-center hidden  md:flex container max-w-[1000px]"
+            />
         </nav>
       </div>
       <MenuList

@@ -1,17 +1,27 @@
-import { Link, SubLink } from "../Header";
+"use client";
+
+import Link from "next/link";
+import { Link as LinkNavbar } from "../Header";
 import List from "../List";
 import SublinkNavBarMobile from "./SublinkNavBarMobile";
+import { useAppDispatch } from "@/hooks/useRedux";
+import { setOpenMobile } from "@/app/features/navbarSlice";
+
 
 
 export interface ILinkNavBarMobile {
-    link: Link;
+    link: LinkNavbar;
 }
 
 const LinkNavBarMobile : React.FC<ILinkNavBarMobile> = ({link}) => {
+    const dispatch = useAppDispatch();
     return (
         <div 
             className='h-full p-4 cursor-pointer'>
-            <div>{link.nameToShow}</div>
+            <Link
+                className="hover:underline cursor-pointer" 
+                onClick={() => dispatch(setOpenMobile(false))}
+                href={link.link}>{link.nameToShow}</Link>
             <ul className='flex flex-col'>
                <List
                     className='flex flex-col gap-y-4'
