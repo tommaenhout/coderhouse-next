@@ -1,4 +1,3 @@
-import Link from 'next/link';
 import React, { useEffect, useState } from 'react';
 import List from './List';
 import SublinksDesktop from './Navbar/SublinksNavBarDesktop';
@@ -27,13 +26,11 @@ const MenuList: React.FC<MenuListProps> = ({isHover, sublinks}) => {
     }, [isHover, sublinks]);
 
     return (
-        console.log(sublinksIntern),
         <div
-            ref = {null}
             onClick={() => {setIsHoverIntern(false)}}
             onMouseEnter={() => {setIsHoverIntern(true)}}
             onMouseLeave={() => {setIsHoverIntern(false)}}
-            className={`h-auto w-full absolute transition-all justify-center z-10 bg-white  ${isHover || isHoverIntern ? 'flex' : '-translate-y-full'}`}>
+            className={`h-auto w-full border-b-2 shadow-xl absolute transition-all justify-center z-10 bg-white  ${isHover || isHoverIntern ? 'flex' : '-translate-y-full'}`}>
                 {(isHover || isHoverIntern) &&<> 
                 <List 
                     ItemComponent={SublinksDesktop}
@@ -41,7 +38,7 @@ const MenuList: React.FC<MenuListProps> = ({isHover, sublinks}) => {
                     sourceName='sublink'
                     className={`flex flex-col w-1/3 text-center`}/>
                 <Image 
-                    src={sublinksIntern[0].link.startsWith("/clothes") ? gabber : gabberin}
+                    src={gabber}
                     alt='close'
                     width={250}
                     height={250}/>
