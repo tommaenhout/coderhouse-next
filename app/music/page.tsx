@@ -1,3 +1,4 @@
+import Products from "@/components/Products";
 import { Metadata, NextPage } from "next";
 import { Params } from "next/dist/shared/lib/router/utils/route-matcher";
 
@@ -9,9 +10,7 @@ export async function generateMetadata () {
 
 const MusicPage : NextPage <Params> = () => {
     return (
-        <div>
-            <h1>All Music</h1>
-        </div>
+       <Products name="music"/>
     );
 };
 

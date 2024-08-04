@@ -14,7 +14,7 @@ const ClothesPage : NextPage <Params> = ({params}) => {
 
     return (
         <div>
-            <Products/>
+            <Products category={category}/>
         </div>
     );
 };

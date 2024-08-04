@@ -1,3 +1,4 @@
+import Products from "@/components/Products";
 import { Metadata, NextPage } from "next";
 import { Params } from "next/dist/shared/lib/router/utils/route-matcher";
 
@@ -12,7 +13,7 @@ const MusicPage : NextPage <Params> = ({params}) => {
 
     return (
         <div>
-            <h1>{category} Music</h1>
+            <Products category={category}/>
         </div>
     );
 };

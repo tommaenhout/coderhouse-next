@@ -3,10 +3,11 @@ import { NextPage } from "next";
 import Image from 'next/image'
 import gabberin from '@/public/gabber-woman.webp';
 import Link from "next/link";
+import Products from "@/components/Products";
 
 const Home : NextPage = () => {
   return (
-    <main className="flex justify-center">
+    <main className="flex flex-col items-center justify-center">
       <div className=" relative h-[400px] bg-black lg:w-8/12 w-full">
           <Image
             src={gabberin}
@@ -26,6 +27,9 @@ const Home : NextPage = () => {
                       >Start Shopping</Link>
             </div>
         </div>
+      </div>
+      <div>
+        <Products/>
       </div>
     
     </main>
