@@ -17,7 +17,7 @@ interface ICard {
 const Card : React.FC<ICard> = ({product}) => {
   return (
     <Link href={`${product.slug}/${product.id}`}>
-        <div className='flex flex-col justify-center p-2 cursor-pointer max-w-[300px] gap-y-4 border-gray-300 shadow-sm hover:shadow-xl'>
+        <div className='flex flex-col justify-center items-center p-2 cursor-pointer max-w-[300px] gap-y-4 border-gray-300 shadow-sm hover:shadow-xl'>
             <Image
                 src={autralian}
                 alt='australian'

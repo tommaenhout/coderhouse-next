@@ -1,4 +1,15 @@
-export const products = [
+export interface IProduct {  
+        id: number;
+        title: string;
+        description: string;
+        inStock: number;
+        price: number;
+        slug: string;
+        image: string;
+        type: string;
+ }
+
+export const products : IProduct[] = [
     {
         id: 1,
         title: 'Australian Hardcore Streetwear Hoodie',
