@@ -13,6 +13,7 @@ import LinkNavBarMobile from "./Navbar/LinkNavBarMobile";
 import { setOpenMobile, setIsHover } from "@/app/features/navbarSlice";
 import { useAppDispatch, useAppSelector } from "@/hooks/useRedux";
 import LinkNavbarDesktop from "./Navbar/LinkNavbarDesktop";
+import { setOpen } from "@/app/features/cartSlice";
 
 export interface Link {
   name: string;
@@ -73,13 +74,16 @@ const Header: React.FC = () => {
           </Link>
           <h1 className="text-2xl md:hidden title font-black">HMS</h1>
           <div className="md:text-2xl text-base absolute right-0 inset-y-0 flex items-center w-auto md:min-w-[150px] md:justify-center px-2">
-            <Image
-              src={cart}
-              alt="cart"
-              width={30}
-              height={30}
-              className="cursor-pointer hover:scale-110 transition-all duration-300"
-            />
+         
+              <Image
+                onClick={() => dispatch(setOpen(true))}
+                src={cart}
+                alt="cart"
+                width={30}
+                height={30}
+                className="cursor-pointer hover:scale-110 transition-all duration-300"
+              />
+         
           </div>
         </div>
         {/* menu desktop */}

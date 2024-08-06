@@ -3,6 +3,7 @@ import Image from 'next/image'
 import australian from '@/public/australian.jpg'
 import { products } from '@/constants/products';
 import Link from 'next/link';
+import CartAdder from './Buttons/ButtonCartAdder';
 
 
 interface IProductDetail {
@@ -49,7 +50,7 @@ const ProductDetail : React.FC<IProductDetail> = ({id}) => {
                 <p className='text-2xl font-bold'>${product.price}</p>
                 <p className='text-sm text-gray-400 font-light'>incl. iva</p>
             </div>
-            <button className='bg-black shadow-lg w-full text-white p-2 rounded hover:scale-110 hover:shadow-lg hover:bg-gray-800 transition-all duration-500'>Add to cart</button>
+            <CartAdder/>
          </div>
     </div>
 </div>
