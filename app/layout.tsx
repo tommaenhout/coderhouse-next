@@ -26,8 +26,8 @@ export default function RootLayout({
         <Cart/>
           {children}
           <div className="h-[200px]"/>
-        </body>
         <Footer/>
+        </body>
       </html>
     </ReduxProviderWrapper>
 
