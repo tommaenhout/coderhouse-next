@@ -4,6 +4,7 @@ import "./globals.css";
 import Header from "@/components/Header";
 import ReduxProviderWrapper from "@/components/ReduxProviderWrapper";
 import Cart from "@/components/Cart";
+import Footer from "@/components/Footer";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -24,7 +25,9 @@ export default function RootLayout({
         <Header/>
         <Cart/>
           {children}
+          <div className="h-[200px]"/>
         </body>
+        <Footer/>
       </html>
     </ReduxProviderWrapper>
 
