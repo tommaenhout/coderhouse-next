@@ -8,9 +8,14 @@ export async function generateMetadata () {
     }
 }
 
-const MusicPage : NextPage <Params> = () => {
+const MusicPage : NextPage <Params> = async () => {
+    const response = await fetch(`http://localhost:3000/api/music`, {
+        cache: 'no-store',
+    });
+
+    const { filteredProducts } = await response.json();
     return (
-       <Products name="music"/>
+       <Products products={filteredProducts}/>
     );
 };
 

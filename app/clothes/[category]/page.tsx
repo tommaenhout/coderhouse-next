@@ -1,6 +1,8 @@
+
+
 import Card from "@/components/Card";
 import Products from "@/components/Products";
-import { Metadata, NextPage } from "next";
+import next, { Metadata, NextPage } from "next";
 import { Params } from "next/dist/shared/lib/router/utils/route-matcher";
 
 export async function generateMetadata ({params} : Params) {
@@ -11,8 +13,10 @@ export async function generateMetadata ({params} : Params) {
 
 const ClothesPage : NextPage <Params> = async ({params}) => {
     const { category } = params;
-    
-    const response = await fetch(`http://localhost:3000/api/clothes/${category}`);
+    const response = await fetch(`http://localhost:3000/api/clothes/${category}`, {
+        cache: 'default',
+    });
+
     const { filteredProducts } = await response.json();
 
     console.log(filteredProducts);
@@ -20,7 +24,7 @@ const ClothesPage : NextPage <Params> = async ({params}) => {
     
     return (
         <div>
-            <Products category={category}/>
+            <Products products={category}/>
         </div>
     );
 };

@@ -1,12 +1,13 @@
 import React from 'react'
 import List from './List'
-import { products } from '@/constants/products'
+import { IProduct, products } from '@/constants/products'
 import Card from './Card'
 import { filterProducts } from '@/utils/helpers';
 
 interface IProducts {
    category? : string;
    name? : "clothes" | "music";
+   products : IProduct
 }
 const Products : React.FC<IProducts> = ({category, name}) => {
   
