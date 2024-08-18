@@ -10,7 +10,7 @@ interface ListProps<T> {
 const List = <T,>({ items, sourceName, ItemComponent, className }: ListProps<T>) => {
 	return (
 		<div className={`${className} overflow-hidden`}>
-			{items.map((item, index) => {
+			{items && items.map((item, index) => {
 				const props = { [sourceName]: item };
 				return <ItemComponent key={index} {...props} />;
 			})}

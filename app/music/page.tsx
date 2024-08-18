@@ -1,4 +1,5 @@
 import Products from "@/components/Products";
+import { IProduct } from "@/constants/products";
 import { Metadata, NextPage } from "next";
 import { Params } from "next/dist/shared/lib/router/utils/route-matcher";
 
@@ -14,8 +15,9 @@ const MusicPage : NextPage <Params> = async () => {
     });
 
     const { filteredProducts } = await response.json();
+    const music = filteredProducts as IProduct[];
     return (
-       <Products products={filteredProducts}/>
+       <Products products={music}/>
     );
 };
 

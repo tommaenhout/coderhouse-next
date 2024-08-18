@@ -1,5 +1,6 @@
 import Products from "@/components/Products";
-import { Metadata, NextPage } from "next";
+import { IProduct } from "@/constants/products";
+import { NextPage } from "next";
 import { Params } from "next/dist/shared/lib/router/utils/route-matcher";
 
 export async function generateMetadata () {
@@ -13,7 +14,9 @@ const ClothesPage : NextPage <Params> = async () => {
         cache: 'no-store',
     });
 
-    const { filteredProducts } = await response.json();
+    const { filteredProducts } = await response.json()
+  
+
     return (
         <div>
             <Products products={filteredProducts}/>
