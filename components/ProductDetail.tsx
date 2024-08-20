@@ -1,17 +1,16 @@
 import React from 'react'
 import Image from 'next/image'
 import australian from '@/public/australian.jpg'
-import { products } from '@/constants/products';
+import { IProduct, products } from '@/constants/products';
 import Link from 'next/link';
 import CartAdder from './Buttons/ButtonCartAdder';
 
 
 interface IProductDetail {
-    id : string;
+    product : IProduct;
 }
 
-const ProductDetail : React.FC<IProductDetail> = ({id}) => {
- const product = products.find(product => product.id.toString().toLowerCase() === id.toLowerCase());
+const ProductDetail : React.FC<IProductDetail> = ({product}) => {
 
     if (!product) {
         return <div className='text-center flex w-full justify-center items-center text-2xl font-bold'>

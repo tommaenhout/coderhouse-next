@@ -1,20 +1,24 @@
 import ProductDetail from "@/components/ProductDetail";
+import { products } from "@/constants/products";
 import { NextPage } from "next";
 import { Params } from "next/dist/shared/lib/router/utils/route-matcher";
 
 export async function generateMetadata ({params} : Params) {
     return {
-        title : `${params.id} Clothes`,
+        title : `${params.id} Music`,
     }
 }
 
-const ClothesPageDetail : NextPage <Params> = ({params}) => {
+const ClothesPageDetail : NextPage <Params> = async  ({params})  => {
     const { id } = params;
+    const response = await fetch(`http://localhost:3000/api/${id}`, {
+        cache: 'no-store',
+    });
+
+    const { filteredProduct } = await response.json();
 
     return (
-        <div>
-            <ProductDetail id={id}/>
-        </div>
+        <ProductDetail product={filteredProduct}/>
     );
 };
 
