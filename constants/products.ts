@@ -13,7 +13,8 @@ export const products : IProduct[] = [
     {
         id: 1,
         title: 'Australian Hardcore Streetwear Hoodie',
-        description: 'Show your love for hardcore music with this stylish Australian hoodie, perfect for any rave.',
+        description: 
+        'Show your love for hardcore music with this stylish Australian hoodie, perfect for any rave.',
         inStock: 100,
         price: 310499,
         slug: '/clothes/australian',

@@ -18,12 +18,12 @@ const ClothesCategoryPage : NextPage <Params> = async ({params}) => {
         cache: 'no-store',
     });
 
-    const { filteredProducts } = await response.json();
-    const clothesCategory = filteredProducts as IProduct[];
+    const clothesCategory = await response.json();
+
 
     return (
         <div>
-            <Products products={clothesCategory}/>
+            <Products products={clothesCategory.docs}/>
         </div>
     );
 };
