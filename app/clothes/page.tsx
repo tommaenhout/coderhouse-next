@@ -14,12 +14,12 @@ const ClothesPage : NextPage <Params> = async () => {
         cache: 'no-store',
     });
 
-    const { filteredProducts } = await response.json()
+    const clothes = await response.json()
   
 
     return (
         <div>
-            <Products products={filteredProducts}/>
+            <Products products={clothes.docs}/>
         </div>
     );
 };

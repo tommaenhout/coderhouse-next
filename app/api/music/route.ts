@@ -1,11 +1,12 @@
-import { products } from "@/constants/products";
+
 import { NextResponse } from "next/server";
+import { returnDocsWithName } from "../clothes/route";
 
 
-export async function GET (request : Request, {params} : any) {
- const filteredProducts =  products.filter(product => product.slug.startsWith("/music"));
-  return NextResponse.json({
-        filteredProducts
-  });
 
+export async function GET () {
+      const docs = await returnDocsWithName("/music");
+       return NextResponse.json({
+             docs
+       });
 }

@@ -14,10 +14,10 @@ const MusicPage : NextPage <Params> = async () => {
         cache: 'no-store',
     });
 
-    const { filteredProducts } = await response.json();
-    const music = filteredProducts as IProduct[];
+    const music = await response.json();
+   
     return (
-       <Products products={music}/>
+       <Products products={music.docs}/>
     );
 };
 

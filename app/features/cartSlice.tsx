@@ -13,7 +13,6 @@ const cartSlice = createSlice({
     initialState: initialState,
     reducers: {
         setOpen : (state, action: PayloadAction<boolean>) => {
-            console.log('action', action)
             state.open = action.payload;
         },
     },
