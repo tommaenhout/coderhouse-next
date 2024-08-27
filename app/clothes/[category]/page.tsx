@@ -1,9 +1,6 @@
 
-
-import Card from "@/components/Card";
 import Products from "@/components/Products";
-import { IProduct } from "@/constants/products";
-import next, { Metadata, NextPage } from "next";
+import  {  NextPage } from "next";
 import { Params } from "next/dist/shared/lib/router/utils/route-matcher";
 
 export async function generateMetadata ({params} : Params) {
@@ -11,6 +8,17 @@ export async function generateMetadata ({params} : Params) {
         title : `${params.category} Clothes`,
     }
 }
+
+export const generateStaticParams = () => {
+    return [
+        {category: "australian"},
+        {category: "bomberjackets"},
+        {category: "shoes"},
+    ]
+}
+
+export const revalidate = 3600;
+
 
 const ClothesCategoryPage : NextPage <Params> = async ({params}) => {
     const { category } = params;

@@ -5,6 +5,7 @@ import Header from "@/components/Header";
 import ReduxProviderWrapper from "@/components/ReduxProviderWrapper";
 import Cart from "@/components/Cart";
 import Footer from "@/components/Footer";
+import { CartProvider } from "@/components/context/CartContext";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -19,6 +20,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
+    <CartProvider>
     <ReduxProviderWrapper>    
       <html lang="en">
         <body className={inter.className}>
@@ -30,6 +32,6 @@ export default function RootLayout({
         </body>
       </html>
     </ReduxProviderWrapper>
-
+    </CartProvider>
   );
 }

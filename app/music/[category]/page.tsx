@@ -9,6 +9,17 @@ export async function generateMetadata ({params} : Params) {
     }
 }
 
+export const generateStaticParams = () => {
+    return [
+        {category: "thunderdome"},
+        {category: "hardcore-top-100"},
+        {category: "hardcore-classics"},
+    ]
+}
+
+export const revalidate = 3600;
+
+
 const MusicCategoryPage : NextPage <Params> = async ({params})  => {
     const { category } = params;
     const response = await fetch(`http://localhost:3000/api/music/${category}`, {
