@@ -1,17 +1,25 @@
-import { products } from "@/constants/products";
-import { Params } from "next/dist/shared/lib/router/utils/route-matcher";
 import { NextResponse } from "next/server";
-
+import { getDocs, collection, query, where} from "firebase/firestore";	
+import { db } from "@/firebase/config";
 
 export async function GET (request : Request, {params} : any) {
- const { id } = params;
- const _id = parseInt(id);
+  const { id } = params;
+  const productosRef = collection(db, 'products');
 
-const filteredProduct = products.find(product => product.id === _id);
+  let q;
 
+ if (id == "all"){
+    q = query(productosRef);
+ } else {
+    q = query(productosRef, where('id', '==', id));
+ }
 
-  return NextResponse.json({
-        filteredProduct
-  });
+  const querySnapshot = await getDocs(q);
+
+ const docs = querySnapshot.docs.map(doc => doc.data());
+    return NextResponse.json({
+        docs
+    });
+
 
 }

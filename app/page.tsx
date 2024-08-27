@@ -5,7 +5,14 @@ import gabberin from '@/public/gabber-woman.webp';
 import Link from "next/link";
 import Products from "@/components/Products";
 
-const Home : NextPage = () => {
+const Home : NextPage = async () => {
+
+  const response = await fetch(`http://localhost:3000/api/all`, {
+    cache: 'no-store',
+});
+
+const allProducts = await response.json();
+
   return (
     <main className="flex flex-col items-center justify-center">
       <div className=" relative h-[400px] bg-black lg:w-8/12 w-full">
@@ -29,7 +36,9 @@ const Home : NextPage = () => {
         </div>
       </div>
       <div>
-        <Products/>
+        <Products
+          products={allProducts.docs}
+        />
       </div>
     
     </main>

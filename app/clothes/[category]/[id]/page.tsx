@@ -15,10 +15,10 @@ const ClothesPageDetail : NextPage <Params> = async  ({params})  => {
         cache: 'no-store',
     });
 
-    const { filteredProduct } = await response.json();
+    const product = await response.json();
 
     return (
-        <ProductDetail product={filteredProduct}/>
+        <ProductDetail product={product.docs[0]}/>
     );
 };
 
