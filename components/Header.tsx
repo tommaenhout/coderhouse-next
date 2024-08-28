@@ -14,6 +14,7 @@ import { setOpenMobile, setIsHover } from "@/app/features/navbarSlice";
 import { useAppDispatch, useAppSelector } from "@/hooks/useRedux";
 import LinkNavbarDesktop from "./Navbar/LinkNavbarDesktop";
 import { setOpen } from "@/app/features/cartSlice";
+import { useCartContext } from "./context/CartContext";
 
 export interface Link {
   name: string;
@@ -30,6 +31,7 @@ export interface SubLink {
 const Header: React.FC = () => {
   const { openMobile, isHover } = useAppSelector((state) => state.navbarSlice);
   const dispatch = useAppDispatch();
+  const {getTotalItems} = useCartContext();
   
   return (
     <header className="bg-white ">
@@ -83,7 +85,7 @@ const Header: React.FC = () => {
                 height={30}
                 className="cursor-pointer hover:scale-110 transition-all duration-300"
               />
-         
+              {getTotalItems() > 0 && <span className="text-sm font-bold">{getTotalItems()}</span>}
           </div>
         </div>
         {/* menu desktop */}

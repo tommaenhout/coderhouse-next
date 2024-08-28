@@ -32,6 +32,7 @@ export const CartProvider = ({ children }: CartProviderProps) => {
   const [cart, setCart] = useState<IProductCart[]>([]);
 
   const addToCart = (item: IProduct) => {
+    console.log(item)
     const itemInCart = cart.find(cartItem => cartItem.id === item.id);
     if (itemInCart) {
       setCart(cart.map(cartItem => cartItem.id === item.id ? { ...cartItem, quantity: cartItem.quantity + 1 } : cartItem));

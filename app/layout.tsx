@@ -21,17 +21,17 @@ export default function RootLayout({
 }>) {
   return (
     <CartProvider>
-    <ReduxProviderWrapper>    
-      <html lang="en">
-        <body className={inter.className}>
-        <Header/>
-        <Cart/>
-          {children}
-          <div className="h-[200px]"/>
-        <Footer/>
-        </body>
-      </html>
-    </ReduxProviderWrapper>
+      <ReduxProviderWrapper>    
+        <html lang="en">
+          <body className={inter.className}>
+          <Header/>
+          <Cart/>
+            {children}
+            <div className="h-[200px]"/>
+          <Footer/>
+          </body>
+        </html>
+      </ReduxProviderWrapper>
     </CartProvider>
   );
 }

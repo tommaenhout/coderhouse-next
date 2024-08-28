@@ -49,7 +49,7 @@ const ProductDetail : React.FC<IProductDetail> = ({product}) => {
                 <p className='text-2xl font-bold'>${product.price}</p>
                 <p className='text-sm text-gray-400 font-light'>incl. iva</p>
             </div>
-            <CartAdder/>
+            <CartAdder product={product}/>
          </div>
     </div>
 </div>
