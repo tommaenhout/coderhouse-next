@@ -2,17 +2,19 @@
 import { IProduct } from "@/constants/products";
 import { createContext, useContext, useState, ReactNode } from "react"
 
-// Define the shape of the context value
+export interface IProductCart extends IProduct {
+    quantity: number;
+}
 interface CartContextType {
-  cart: IProduct[];
+  cart: IProductCart[];
   addToCart: (item: IProduct) => void;
   removeFromCart: (item: IProduct) => void;
+  getTotal : () => number;
+  getTotalItems : () => number;
 }
 
-// Create the context with an empty default value
 const CartContext = createContext<CartContextType | undefined>(undefined);
 
-// Custom hook to use the CartContext
 export const useCartContext = () => {
   const context = useContext(CartContext);
   if (!context) {
@@ -21,26 +23,44 @@ export const useCartContext = () => {
   return context;
 }
 
-// Define the props for the CartProvider component
 interface CartProviderProps {
   children: ReactNode;
 }
 
-// CartProvider component
-export const CartProvider = ({ children }: CartProviderProps) => {
-  const [cart, setCart] = useState<IProduct[]>([]);
-  console.log(cart);
 
-  const addToCart = (item: any) => {
-    setCart([...cart, item]);
+export const CartProvider = ({ children }: CartProviderProps) => {
+  const [cart, setCart] = useState<IProductCart[]>([]);
+
+  const addToCart = (item: IProduct) => {
+    const itemInCart = cart.find(cartItem => cartItem.id === item.id);
+    if (itemInCart) {
+      setCart(cart.map(cartItem => cartItem.id === item.id ? { ...cartItem, quantity: cartItem.quantity + 1 } : cartItem));
+    } else {
+      setCart([...cart, { ...item, quantity: 1 }]);
+    }
   }
 
-  const removeFromCart = (item: any) => {
-    setCart(cart.filter(cartItem => cartItem !== item));
+  const removeFromCart = (item: IProduct) => {
+    const itemInCart = cart.find(cartItem => cartItem.id === item.id);
+    if (itemInCart) {
+      if (itemInCart.quantity === 1) {
+        setCart(cart.filter(cartItem => cartItem.id !== item.id));
+      } else {
+        setCart(cart.map(cartItem => cartItem.id === item.id ? { ...cartItem, quantity: cartItem.quantity - 1 } : cartItem));
+      }
+    }
+  }
+
+  const getTotal = () => {
+    return cart.reduce((acc, item) => acc + item.price * item.quantity, 0);
+  }
+
+  const getTotalItems = () => {
+    return cart.reduce((acc, item) => acc + item.quantity, 0);
   }
 
   return (
-    <CartContext.Provider value={{ cart, addToCart, removeFromCart }}>
+    <CartContext.Provider value={{ cart, addToCart, removeFromCart, getTotal, getTotalItems }}>
       {children}
     </CartContext.Provider>
   );

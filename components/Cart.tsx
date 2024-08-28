@@ -1,15 +1,14 @@
-"use client";
-
-import React from "react";
-import { DialogContent, DialogHeader, DialogTitle } from "./Modal";
-import { Dialog } from "@radix-ui/react-dialog";
-import { useAppSelector, useAppDispatch } from "@/hooks/useRedux";
+import { useAppDispatch, useAppSelector } from "@/hooks/useRedux";
+import { useCartContext } from "./context/CartContext";
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "./Modal";
+import { IProduct } from "@/constants/products";
 import { setOpen } from "@/app/features/cartSlice";
 
-const Cart: React.FC = () => {
+
+const Cart = () => {
   const dispatch = useAppDispatch();
   const { open } = useAppSelector((state) => state.cartSlice);
-
+  const { cart } = useCartContext();
 
   return (
     <Dialog
@@ -25,39 +24,19 @@ const Cart: React.FC = () => {
         </DialogHeader>
         <form>
           <div className="p-4">
-      
-              <div>
-             
-                  <div  className="flex justify-between items-center mb-4">
-                    <div>
-                      <h3 className="text-lg">"name"</h3>
-                      <p>
-                        4 x $300000
-                      </p>
-                    </div>
-                    <button
-                      type="button"
-                      className="text-red-500 p-1 hover:text-red-700"
-                    >
-                      Remove
-                    </button>
-                  </div>
-                <div className="flex justify-between mt-4">
-                  <h3 className="text-lg font-bold">Total:</h3>
-                  <p className="text-lg font-bold">$</p>
+            {cart.map((product : IProduct, index : number) => (
+              <div key={index} className="flex justify-between items-center mb-4">
+                <div>
+                  <h3 className="text-lg">{product.title}</h3>
+                  <p>
+                    {product.inStock} x ${product.price}
+                  </p>
                 </div>
+                <button type="button" className="bg-red-500 text-white px-4 py-2 rounded">
+                  Remove
+                </button>
               </div>
-            
-          </div>
-          <div className="w-full justify-end flex mt-2">
-            <button
-              className="
-                bg-black text-white p-2 rounded hover:scale-110 hover:shadow-lg hover:bg-gray-800 transition-all duration-500"
-              type="submit"
-           
-            >
-              Buy
-            </button>
+            ))}
           </div>
         </form>
       </DialogContent>
