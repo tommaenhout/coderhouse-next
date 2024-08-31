@@ -17,3 +17,8 @@ interface FilterProductsParams {
     if (name) return products.filter(product => product.slug.startsWith("/" + name));
     return products.filter(product => product.type === category);
   }
+
+
+  export const cn = (...classNames: (string | undefined)[]): string => {
+    return classNames.filter(Boolean).join(" ");
+};
