@@ -21,18 +21,22 @@ const TableAdmin: React.FC<TableAdmin> = ({data}) => {
     {
       name: "Name",
       selector: (row) => row.title,
+      width: "25%",
     },
     {
       name: "Price",
       selector: (row) => row.price,
+      width: "10%",
     },
     {
       name: "Description",
       selector: (row) => row.description,
+        width: "50%",
     },
     {
       name: "Type",
       selector: (row) => row.type,
+        width: "15%",
     },
   ];
 

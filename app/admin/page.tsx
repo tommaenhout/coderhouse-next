@@ -12,7 +12,6 @@ const allProducts = await response.json();
 
   return (
     <section className='flex flex-col gap-8 w-full lg:w-11/12 mx-auto'>
-      
            <TableAdmin
              data={allProducts.docs}
            />
