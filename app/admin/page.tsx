@@ -1,14 +1,21 @@
+import TableAdmin from '@/components/TableAdmin'
 import { NextPage } from 'next'
 import React from 'react'
 
-const AdminPage : NextPage = () => {
+const AdminPage : NextPage = async () => {
+
+  const response = await fetch(`http://localhost:3000/api/all`, {
+    cache: 'no-store',
+});
+
+const allProducts = await response.json();
+
   return (
-    <section className='flex flex-col gap-8'>
-        <h1 className='text-3xl font-bold text-center'>Admin Page</h1>
-        <p className='text-center'>
-            This is the admin page. You can manage your products and orders here.
-            This page will be protected.
-        </p>
+    <section className='flex flex-col gap-8 w-full lg:w-11/12 mx-auto'>
+      
+           <TableAdmin
+             data={allProducts.docs}
+           />
     </section>
   )
 }
