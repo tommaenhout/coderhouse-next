@@ -1,19 +1,28 @@
-"use client"
+"use client";
 
 import { useAppDispatch, useAppSelector } from "@/hooks/useRedux";
 import { IProductCart, useCartContext } from "./context/CartContext";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "./Modal";
 import { IProduct } from "@/constants/products";
 import { setOpen } from "@/app/features/cartSlice";
-
+import { useRouter } from "next/navigation";
+import Button from "./Button";
+import List from "./List";
+import CartListItem from "./CartListItem";
 
 const Cart = () => {
   const dispatch = useAppDispatch();
   const { open } = useAppSelector((state) => state.cartSlice);
   const { cart, removeFromCart, getTotal } = useCartContext();
+  const router = useRouter();
 
-  const remove = (product : IProduct) => {
+  const remove = (product: IProduct) => {
     removeFromCart(product);
+  };
+
+  const onClickHandler = () => {
+    dispatch(setOpen(false));
+    router.push("/confirmation");
   };
 
   return (
@@ -28,26 +37,20 @@ const Cart = () => {
         <DialogHeader>
           <DialogTitle>Shopping Cart</DialogTitle>
         </DialogHeader>
-        <form>
-          <div className="p-4">
-            {cart.map((product : IProductCart, index : number) => (
-              <div key={index} className="flex justify-between items-center mb-4">
-                <div>
-                  <h3 className="text-lg">{product.title}</h3>
-                  <p>
-                    {product.quantity} x ${product.price}
-                  </p>
-                </div>
-                <button onClick={() => remove(product)} type="button" className="bg-red-500 text-white px-4 py-2 rounded">
-                  Remove
-                </button>
-              </div>
-            ))}
+        <List
+          className="p-4"
+          items={cart}
+          sourceName="product"
+          ItemComponent={CartListItem}
+        />
+        <div className="p-4 border-t border-gray-200 flex justify-start">
+          <h3 className="text-lg font-bold">Total: ${getTotal()}</h3>
+        </div>
+        <div className="flex justify-end p-4">
+          <div>
+            <Button onClick={onClickHandler}>Confirm</Button>
           </div>
-          <div className="p-4 border-t border-gray-200 flex justify-end">
-            <h3 className="text-lg font-bold">Total: ${getTotal()}</h3>
-          </div>
-        </form>
+        </div>
       </DialogContent>
     </Dialog>
   );
