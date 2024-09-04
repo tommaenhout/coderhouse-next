@@ -21,7 +21,7 @@ import { ref, getDownloadURL, uploadBytes } from "firebase/storage";
 import { IProduct } from "@/constants/products";
 import { v4 as uuidv4 } from 'uuid';
 import { useState } from "react";
-import { toast, useToast } from "@/hooks/useToast";
+import { useToast } from "@/hooks/useToast";
 
 
 const createProduct = async (values : IProduct, file : File) => {
