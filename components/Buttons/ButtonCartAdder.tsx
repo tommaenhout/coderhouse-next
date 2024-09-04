@@ -13,9 +13,8 @@ interface ICartAdder {
 const ButtonCartAdder : React.FC<ICartAdder> =({product, quantity}) => {
   const {addToCart} = useCartContext();
 
-  console.log(product)
 
-  
+
   return (
     <Button onClick={()=> {
       product && addToCart(product)

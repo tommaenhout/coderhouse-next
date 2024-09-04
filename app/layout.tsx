@@ -6,6 +6,7 @@ import ReduxProviderWrapper from "@/components/ReduxProviderWrapper";
 import Cart from "@/components/Cart";
 import Footer from "@/components/Footer";
 import { CartProvider } from "@/components/context/CartContext";
+import { Toaster } from "@/components/Toaster";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -27,6 +28,7 @@ export default function RootLayout({
           <Header/>
           <Cart/>
             {children}
+            <Toaster/>
             <div className="h-[200px]"/>
           <Footer/>
           </body>

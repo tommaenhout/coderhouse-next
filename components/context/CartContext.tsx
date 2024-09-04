@@ -1,5 +1,6 @@
 'use client'
 import { IProduct } from "@/constants/products";
+import { useToast } from "@/hooks/useToast";
 import { createContext, useContext, useState, ReactNode } from "react"
 
 export interface IProductCart extends IProduct {
@@ -30,6 +31,7 @@ interface CartProviderProps {
 
 export const CartProvider = ({ children }: CartProviderProps) => {
   const [cart, setCart] = useState<IProductCart[]>([]);
+  const {toast} = useToast();
 
   const addToCart = (item: IProduct) => {
     console.log(item)
@@ -39,6 +41,10 @@ export const CartProvider = ({ children }: CartProviderProps) => {
     } else {
       setCart([...cart, { ...item, quantity: 1 }]);
     }
+    toast({
+      title: 'Item added to cart',
+      description: `${item.title} was added to your cart`,
+    })
   }
 
   const removeFromCart = (item: IProduct) => {
