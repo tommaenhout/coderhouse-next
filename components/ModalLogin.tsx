@@ -5,12 +5,12 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle } from "./Modal";
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
+import { useAuthContext } from "./context/AuthContext";
  
 import  Button  from "@/components/Button"
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -41,6 +41,7 @@ interface ILoginModal {
 
 const LoginModal : React.FC<ILoginModal> = ({open}) => {
     const [isLoading, setIsLoading] = useState(false);
+    const { registerUser } = useAuthContext();
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: {
@@ -51,13 +52,15 @@ const LoginModal : React.FC<ILoginModal> = ({open}) => {
 
       const onSubmit = async (
         data: z.infer<typeof formSchema>,
-        event?: React.BaseSyntheticEvent
+        isRegister: boolean,
       ) => {
-        if (event) {
-          setIsLoading(true);
-          event.preventDefault();
-          console.log(data);
-        }
+        console.log("data", data);
+        console.log("isRegister", isRegister);
+        console.log ("event", event);
+          console.log("event", event);
+          registerUser({ email: data.username, password: data.password });
+
+     
       }
 
 
@@ -71,7 +74,7 @@ const LoginModal : React.FC<ILoginModal> = ({open}) => {
           <DialogTitle>Login</DialogTitle>
         </DialogHeader>
         <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+      <form className="space-y-8">
         <FormField
           control={form.control}
           name="username"
@@ -79,7 +82,9 @@ const LoginModal : React.FC<ILoginModal> = ({open}) => {
             <FormItem>
               <FormLabel>Username</FormLabel>
               <FormControl>
-                <Input placeholder="write your username" {...field} />
+                <Input 
+                  
+                  placeholder="write your username" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -99,6 +104,12 @@ const LoginModal : React.FC<ILoginModal> = ({open}) => {
           )}
         />
         <Button type="button">Login</Button>
+        <Button
+              onClick={() => form.handleSubmit((data,event) => onSubmit(data, true))()} 
+              type="button"
+            >
+              Register
+            </Button>
       </form>
     </Form>
       </DialogContent>

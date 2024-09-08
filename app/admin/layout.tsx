@@ -1,18 +1,21 @@
 "use client"
 
 import { useAuthContext } from "@/components/context/AuthContext";
+import { useEffect, useState } from "react";
+import LoginPage from "./login/LoginPage";
 
 interface AdminLayoutProps {
     children: React.ReactNode;
-    login: React.ReactNode;
-    }
+}
 
-const AdminLayout = ({ children, login } : AdminLayoutProps) => {
+const AdminLayout = ({ children } : AdminLayoutProps) => {
   const { user } = useAuthContext();
 
-  return (
+
+  
+  return  (
     <>
-      {user.logged ? children : login}
+      {user?.logged ? children : <LoginPage/>}
     </>
   );
 };

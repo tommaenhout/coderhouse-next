@@ -2,9 +2,10 @@ import LoginModal from '@/components/ModalLogin'
 import React from 'react'
 
 const LoginPage = () => {
+  
   return (
     <div>
-        <LoginModal open= {true}/>
+        <LoginModal open={true}/>
     </div>
   )
 }
