@@ -13,6 +13,9 @@ export const returnDocsWitCategory = async (category : string) => {
 
 export async function GET (request : Request, {params} : any) {
  const { category } = params;
+ if (category !== "australian" && category !== "bomberjackets" && category !== "shoes") {
+      return NextResponse.json({ message: "Not Found" }, { status: 404 });
+ }
  const docs = await returnDocsWitCategory(category);
 
   return NextResponse.json({

@@ -10,9 +10,13 @@ export async function generateMetadata () {
 }
 
 const ClothesPage : NextPage <Params> = async () => {
-    const response = await fetch(`http://localhost:3000/api/clothes`, {
+    const response = await fetch(`http://localhost:3000/api/tom`, {
         cache: 'no-store',
     });
+
+    if (!response.ok) {
+        throw new Error('Something went wrong');
+    }
 
     const clothes = await response.json()
   

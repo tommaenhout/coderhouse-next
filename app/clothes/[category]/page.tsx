@@ -22,9 +22,13 @@ export const revalidate = 3600;
 
 const ClothesCategoryPage : NextPage <Params> = async ({params}) => {
     const { category } = params;
-    const response = await fetch(`http://localhost:3000/api/clothes/${category}`, {
+    const response = await fetch(`http://localhost:3000/api/clothes/tom`, {
         cache: 'no-store',
     });
+
+    if (!response.ok) {
+        throw new Error('Something went wrong in the clothes category page during the fetch');
+    }
 
     const clothesCategory = await response.json();
 

@@ -1,12 +1,20 @@
 
 "use client"
-import { createContext, useContext, useState, ReactNode } from "react";
-import { createUserWithEmailAndPassword, UserCredential } from "firebase/auth";
-import { auth } from "@/firebase/config";
+import { createContext, useContext, useState, ReactNode, useEffect } from "react";
+import { 
+    createUserWithEmailAndPassword, 
+    signOut,
+    onAuthStateChanged,
+    signInWithPopup,
+    signInWithEmailAndPassword } from "firebase/auth";
+import { auth, provider } from "@/firebase/config";
 
 interface AuthContextType {
     user: UserType | null;
     registerUser: (values: RegisterValues) => Promise<void>;
+    loginUser: (values: RegisterValues) => Promise<void>;
+    logout: () => Promise<void>;
+    googleLogin: () => Promise<void>;
 }
 
 interface UserType {
@@ -39,21 +47,58 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
     const registerUser = async (values: RegisterValues): Promise<void> => {
         try {
-            const userCredential: UserCredential = await createUserWithEmailAndPassword(auth, values.email, values.password);
-            const user = userCredential.user;
-
-            setUser({
-                logged: true,
-                email: user.email,
-                uid: user.uid
-            });
+            await createUserWithEmailAndPassword(auth, values.email, values.password);
         } catch (error) {
             console.error("Error registering user:", error);
         }
     };
 
+    const loginUser = async (values: RegisterValues): Promise<void> => {
+        try {
+             await signInWithEmailAndPassword(auth, values.email, values.password);
+        } catch (error) {
+            console.error("Error logging in user:", error);
+        }
+    };
+
+    const logout = async (): Promise<void> => {
+        try {
+            await signOut(auth);
+        } catch (error) {
+            console.error("Error logging out user:", error);
+        }
+    }
+
+    const googleLogin = async (): Promise<void> => {    
+        try {
+            await signInWithPopup(auth, provider);
+        } catch (error) {
+            console.error("Error logging in user with Google:", error);
+        }
+    }
+
+    useEffect(() => {
+        const unsubscribe = onAuthStateChanged(auth, (user) => {
+            if (user) {
+                setUser({
+                    logged: true,
+                    email: user.email,
+                    uid: user.uid
+                });
+            } else {
+                setUser({
+                    logged: false,
+                    email: null,
+                    uid: null
+                });
+            }
+        });
+
+        return () => unsubscribe();
+    }, []);
+
     return (
-        <AuthContext.Provider value={{ user, registerUser }}>
+        <AuthContext.Provider value={{ user, registerUser, loginUser, logout, googleLogin }}>
             {children}
         </AuthContext.Provider>
     );

@@ -40,8 +40,7 @@ interface ILoginModal {
 }
 
 const LoginModal : React.FC<ILoginModal> = ({open}) => {
-    const [isLoading, setIsLoading] = useState(false);
-    const { registerUser } = useAuthContext();
+    const { registerUser, loginUser, googleLogin } = useAuthContext();
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: {
@@ -54,13 +53,9 @@ const LoginModal : React.FC<ILoginModal> = ({open}) => {
         data: z.infer<typeof formSchema>,
         isRegister: boolean,
       ) => {
-        console.log("data", data);
-        console.log("isRegister", isRegister);
-        console.log ("event", event);
-          console.log("event", event);
-          registerUser({ email: data.username, password: data.password });
-
-     
+         isRegister ? 
+         registerUser({ email: data.username, password: data.password }) : 
+         loginUser({ email: data.username, password: data.password });
       }
 
 
@@ -68,8 +63,9 @@ const LoginModal : React.FC<ILoginModal> = ({open}) => {
     <Dialog
       open={open}
       modal
+  
     >
-      <DialogContent className="bg-white sm:w-2/5 w-full">
+      <DialogContent  showCross = {false} className="bg-white sm:w-2/5 w-full">
         <DialogHeader>
           <DialogTitle>Login</DialogTitle>
         </DialogHeader>
@@ -103,13 +99,26 @@ const LoginModal : React.FC<ILoginModal> = ({open}) => {
             </FormItem>
           )}
         />
-        <Button type="button">Login</Button>
+        <Button 
+              onClick={() => form.handleSubmit((data,event) => onSubmit(data, false))()}
+              type="button"
+            >
+              Login
+            </Button>
+
+            <Button
+              onClick={googleLogin}
+              type="button"
+            > 
+              Google Login
+            </Button>
         <Button
               onClick={() => form.handleSubmit((data,event) => onSubmit(data, true))()} 
               type="button"
             >
               Register
             </Button>
+        
       </form>
     </Form>
       </DialogContent>
