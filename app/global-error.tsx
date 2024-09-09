@@ -11,7 +11,7 @@ export default function GlobalError({
   return (
     <html>
       <body>
-      <div className='flex w-96 h-40 justify-end gap-9 text-center items-center flex-col mx-auto'>
+      <div className='flex w-96 pt-10 justify-end gap-9 text-center items-center flex-col mx-auto'>
       <h2>Something went wrong globally! {error.message}</h2>
       <Button
         onClick={
