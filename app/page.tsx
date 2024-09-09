@@ -14,7 +14,7 @@ const Home : NextPage = async () => {
     },
 });
 
-
+console.log(response)
 
 const allProducts = await response.json();
 
