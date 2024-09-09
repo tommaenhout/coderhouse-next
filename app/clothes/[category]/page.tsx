@@ -3,7 +3,11 @@ import Products from "@/components/Products";
 import  {  NextPage } from "next";
 import { Params } from "next/dist/shared/lib/router/utils/route-matcher";
 
-export async function generateMetadata ({params} : Params) {
+interface ClothesParams extends Params {
+    category: string;
+  }
+
+  export async function generateMetadata({ params }: { params: ClothesParams }) {
     return {
         title : `${params.category} Clothes`,
     }
@@ -20,9 +24,9 @@ export const generateStaticParams = () => {
 export const revalidate = 3600;
 
 
-const ClothesCategoryPage : NextPage <Params> = async ({params}) => {
+const ClothesCategoryPage: NextPage<{ params: ClothesParams }> = async ({ params }) => {
     const { category } = params;
-    const response = await fetch(`http://localhost:3000/api/clothes/tom`, {
+    const response = await fetch(`http://localhost:3000/api/clothes/${category}`, {
         cache: 'no-store',
     });
 

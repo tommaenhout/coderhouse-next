@@ -3,7 +3,11 @@ import { IProduct } from "@/constants/products";
 import { Metadata, NextPage } from "next";
 import { Params } from "next/dist/shared/lib/router/utils/route-matcher";
 
-export async function generateMetadata ({params} : Params) {
+interface MusicParams extends Params {
+    category: string;
+  }
+
+  export async function generateMetadata({ params }: { params: MusicParams }) {
     return {
         title : `${params.category} Music`,
     }
@@ -20,11 +24,15 @@ export const generateStaticParams = () => {
 export const revalidate = 3600;
 
 
-const MusicCategoryPage : NextPage <Params> = async ({params})  => {
+const MusicCategoryPage: NextPage<{ params: MusicParams }> = async ({ params }) => {
     const { category } = params;
     const response = await fetch(`http://localhost:3000/api/music/${category}`, {
         cache: 'no-store',
     });
+
+    if (!response.ok) {
+        throw new Error('Something went wrong in the music/category page');
+    }
 
     const musicCategory = await response.json();
 

@@ -1,0 +1,15 @@
+# Allow all
+User-agent: *
+
+# Disallow specific folders or pages
+Disallow: /admin/
+Disallow: /api/
+Disallow: /confirmation/
+Disallow: /create-product/
+Disallow: /store/
+
+# Allow everything else
+Allow: /
+
+# Specify the location of the sitemap
+Sitemap: /sitemap.xml

@@ -69,6 +69,7 @@ const Header: React.FC = () => {
             alt="hamburger"
             width={30}
             height={30}
+          
             className="md:hidden cursor-pointer"
           />
           <Link className="text-4xl hidden md:block title font-black p-4 rounded" href="/">
@@ -76,7 +77,6 @@ const Header: React.FC = () => {
           </Link>
           <h1 className="text-2xl md:hidden title font-black">HMS</h1>
           <div className="md:text-2xl text-base absolute right-0 inset-y-0 flex items-center w-auto md:min-w-[150px] md:justify-center px-2">
-         
               <Image
                 onClick={() => dispatch(setOpen(true))}
                 src={cart}

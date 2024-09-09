@@ -49,7 +49,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         try {
             await createUserWithEmailAndPassword(auth, values.email, values.password);
         } catch (error) {
-            console.error("Error registering user:", error);
+            throw new Error("Error registering user");
         }
     };
 
@@ -57,7 +57,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         try {
              await signInWithEmailAndPassword(auth, values.email, values.password);
         } catch (error) {
-            console.error("Error logging in user:", error);
+            throw new Error("Error logging in user");
         }
     };
 
@@ -65,7 +65,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         try {
             await signOut(auth);
         } catch (error) {
-            console.error("Error logging out user:", error);
+           throw new Error("Error logging out user");
         }
     }
 
@@ -73,7 +73,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         try {
             await signInWithPopup(auth, provider);
         } catch (error) {
-            console.error("Error logging in user with Google:", error);
+           throw new Error("Error logging in with Google");
         }
     }
 

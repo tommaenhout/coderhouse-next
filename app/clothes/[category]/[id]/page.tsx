@@ -1,19 +1,27 @@
 import ProductDetail from "@/components/ProductDetail";
-import { products } from "@/constants/products";
 import { NextPage } from "next";
 import { Params } from "next/dist/shared/lib/router/utils/route-matcher";
 
-export async function generateMetadata ({params} : Params) {
-    return {
-        title : `${params.id} Music`,
-    }
-}
+interface ClothesParams extends Params {
+    category: string;
+    id: string;
+  }
 
-const ClothesPageDetail : NextPage <Params> = async  ({params})  => {
+  export async function generateMetadata({ params }: { params: ClothesParams }) {
+    return {
+      title: `${params.category} Clothes - ${params.id}`,
+    };
+  }
+
+  const ClothesPageDetail: NextPage<{ params: ClothesParams }> = async ({ params }) => {
     const { id } = params;
     const response = await fetch(`http://localhost:3000/api/${id}`, {
         cache: 'no-store',
     });
+
+    if (!response.ok) {
+        throw new Error('Something went wrong in the clothes/id page during the fetch');
+    }
 
     const product = await response.json();
 

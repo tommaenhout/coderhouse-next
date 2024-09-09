@@ -26,14 +26,19 @@ import { useToast } from "@/hooks/useToast";
 
 const createProduct = async (values : IProduct, file : File) => {
   const storageRef = ref(storage, `${values.id}`);
+  try { 
   const snapshot = await uploadBytes(storageRef, file);
   const fileUrl = await getDownloadURL(snapshot.ref);
   const docRef = doc(db, 'products', values.id.toString());
   return setDoc(docRef, { 
         ...values,
         image : fileUrl
-      })
-};
+      });
+  } catch (error) {
+    throw new Error("Error uploading file");
+  }
+}
+
 
 
 export function FormCreateProduct() {

@@ -1,7 +1,5 @@
 import Products from "@/components/Products";
-import { IProduct } from "@/constants/products";
-import { Metadata, NextPage } from "next";
-import { Params } from "next/dist/shared/lib/router/utils/route-matcher";
+import { NextPage } from "next";
 
 export async function generateMetadata () {
     return {
@@ -9,10 +7,14 @@ export async function generateMetadata () {
     }
 }
 
-const MusicPage : NextPage <Params> = async () => {
+const MusicPage : NextPage = async () => {
     const response = await fetch(`http://localhost:3000/api/music`, {
         cache: 'no-store',
     });
+
+    if (!response.ok) {
+        throw new Error('Something went wrong');
+    }
 
     const music = await response.json();
    

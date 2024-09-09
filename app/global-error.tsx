@@ -1,7 +1,5 @@
 'use client'
 import Button from "@/components/Button"
-
- // Error boundaries must be Client Components
  
 export default function GlobalError({
   error,
@@ -11,11 +9,10 @@ export default function GlobalError({
   reset: () => void
 }) {
   return (
-    // global-error must include html and body tags
     <html>
       <body>
       <div className='flex w-96 h-40 justify-end gap-9 text-center items-center flex-col mx-auto'>
-      <h2>Something went wrong globally!</h2>
+      <h2>Something went wrong globally! {error.message}</h2>
       <Button
         onClick={
           () => reset()

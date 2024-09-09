@@ -23,6 +23,7 @@ const Card : React.FC<ICard> = ({product}) => {
                 alt='australian'
                 width={200}
                 height={200}
+                 
             />
             <div className='block text-center p-4 space-y-4'>
                 <h2 className='font-light text-sm'>{product.title}</h2>

@@ -1,7 +1,5 @@
 import Products from "@/components/Products";
-import { IProduct } from "@/constants/products";
 import { NextPage } from "next";
-import { Params } from "next/dist/shared/lib/router/utils/route-matcher";
 
 export async function generateMetadata () {
     return {
@@ -9,8 +7,8 @@ export async function generateMetadata () {
     }
 }
 
-const ClothesPage : NextPage <Params> = async () => {
-    const response = await fetch(`http://localhost:3000/api/tom`, {
+const ClothesPage : NextPage = async () => {
+    const response = await fetch(`http://localhost:3000/api/clothes`, {
         cache: 'no-store',
     });
 
