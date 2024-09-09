@@ -13,13 +13,7 @@ interface MusicParams extends Params {
     }
 }
 
-export const generateStaticParams = () => {
-    return [
-        {category: "thunderdome"},
-        {category: "hardcore-top-100"},
-        {category: "hardcore-classics"},
-    ]
-}
+
 
 export const revalidate = 3600;
 

@@ -13,13 +13,7 @@ interface ClothesParams extends Params {
     }
 }
 
-export const generateStaticParams = () => {
-    return [
-        {category: "australian"},
-        {category: "bomberjackets"},
-        {category: "shoes"},
-    ]
-}
+
 
 export const revalidate = 3600;
 
