@@ -5,7 +5,7 @@ import React from "react";
 import ButtonLogout from "@/components/ButtonLogout";
 
 const AdminPage: NextPage = async () => {
-  const response = await fetch(`http://${process.env.VERCEL_APP}/api/all`, {
+  const response = await fetch(`http://${process.env.VERCEL_URL}/api/all`, {
     cache: "no-store",
   });
 
