@@ -8,7 +8,7 @@ export async function generateMetadata () {
 }
 
 const MusicPage : NextPage = async () => {
-    const response = await fetch(`http://localhost:3000/api/music`, {
+    const response = await fetch(`http://${process.env.VERCEL_URL}/api/music`, {
         cache: 'no-store',
     });
 

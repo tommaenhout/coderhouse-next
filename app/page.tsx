@@ -7,7 +7,7 @@ import Products from "@/components/Products";
 
 const Home : NextPage = async () => {
 
-  const response = await fetch(`http://localhost:3000/api/all`, {
+  const response = await fetch(`http://${process.env.VERCEL_URL}/api/all`, {
     cache: 'no-store',
 });
 

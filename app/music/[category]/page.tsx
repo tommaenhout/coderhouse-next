@@ -26,7 +26,7 @@ export const revalidate = 3600;
 
 const MusicCategoryPage: NextPage<{ params: MusicParams }> = async ({ params }) => {
     const { category } = params;
-    const response = await fetch(`http://localhost:3000/api/music/${category}`, {
+    const response = await fetch(`http://${process.env.VERCEL_URL}/api/music/${category}`, {
         cache: 'no-store',
     });
 

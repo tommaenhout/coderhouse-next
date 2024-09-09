@@ -15,7 +15,7 @@ interface ClothesParams extends Params {
 
   const ClothesPageDetail: NextPage<{ params: ClothesParams }> = async ({ params }) => {
     const { id } = params;
-    const response = await fetch(`http://localhost:3000/api/${id}`, {
+    const response = await fetch(`http://${process.env.VERCEL_URL}/api/${id}`, {
         cache: 'no-store',
     });
 

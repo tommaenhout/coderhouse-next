@@ -8,7 +8,7 @@ export async function generateMetadata () {
 }
 
 const ClothesPage : NextPage = async () => {
-    const response = await fetch(`http://localhost:3000/api/clothes`, {
+    const response = await fetch(`http://${process.env.VERCEL_URL}/api/clothes`, {
         cache: 'no-store',
     });
 
