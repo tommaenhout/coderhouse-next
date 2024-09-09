@@ -1,6 +1,6 @@
 import React from 'react'
 import List from './List'
-import { IProduct, products } from '@/constants/products'
+import { IProduct } from '@/constants/products'
 import Card from './Card'
 
 interface IProducts {

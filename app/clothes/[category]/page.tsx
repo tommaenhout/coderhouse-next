@@ -20,7 +20,7 @@ export const revalidate = 3600;
 
 const ClothesCategoryPage: NextPage<{ params: ClothesParams }> = async ({ params }) => {
     const { category } = params;
-    const response = await fetch(`http://${process.env.VERCEL_URL}/api/clothes/${category}`, {
+    const response = await fetch(`http://${process.env.VERCEL_APP}/api/clothes/${category}`, {
         cache: 'no-store',
     });
 

@@ -7,18 +7,16 @@ import Products from "@/components/Products";
 
 const Home : NextPage = async () => {
 
-  const response = await fetch(`http://${process.env.VERCEL_URL}/api/all`, {
+  const response = await fetch(`http://${process.env.VERCEL_APP}/api/all`, {
     cache: 'no-store',
     headers: {
       'Content-Type': 'application/json',
     },
 });
 
-console.log(response)
+
 
 const allProducts = await response.json();
-
-console.log(allProducts)
 
   return (
     <main className="flex flex-col items-center justify-center">

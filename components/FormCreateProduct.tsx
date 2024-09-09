@@ -22,6 +22,7 @@ import { IProduct } from "@/constants/products";
 import { v4 as uuidv4 } from 'uuid';
 import { useState } from "react";
 import { useToast } from "@/hooks/useToast";
+import { useRouter } from "next/navigation";
 
 
 const createProduct = async (values : IProduct, file : File) => {
@@ -44,6 +45,7 @@ const createProduct = async (values : IProduct, file : File) => {
 export function FormCreateProduct() {
   const [isLoading, setIsLoading] = useState(false);
   const { toast } = useToast();
+  const router = useRouter();
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -84,6 +86,7 @@ export function FormCreateProduct() {
       }).finally(() => {
       setIsLoading(false);
       form.reset();
+      router.refresh();
     })
    
       }

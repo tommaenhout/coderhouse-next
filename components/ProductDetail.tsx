@@ -1,7 +1,6 @@
 import React from 'react'
 import Image from 'next/image'
-import australian from '@/public/australian.jpg'
-import { IProduct, products } from '@/constants/products';
+import { IProduct } from '@/constants/products';
 import Link from 'next/link';
 import CartAdder from './Buttons/ButtonCartAdder';
 
@@ -24,7 +23,7 @@ const ProductDetail : React.FC<IProductDetail> = ({product}) => {
     <div className='col-span-1 lg:col-span-2 p-4 md:p-8 lg:p-12'>
         <div className='m-auto w-2/3 h-2/3'>
             <Image 
-                src={australian} 
+                src={product.image} 
                 alt='product'
                 width={600} 
                 height={600}

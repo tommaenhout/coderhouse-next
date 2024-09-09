@@ -11,6 +11,7 @@ interface ICard {
     inStock : number;
     price : number;
     slug : string;
+    image : string;
   }
 }
 
@@ -18,13 +19,14 @@ const Card : React.FC<ICard> = ({product}) => {
   return (
     <Link href={`${product.slug}/${product.id}`}>
         <div className='flex flex-col justify-center items-center p-2 cursor-pointer max-w-[300px] gap-y-4 border-gray-300 shadow-sm hover:shadow-xl'>
+          <div className='w-[200px] h-[200px] bg-gray-300 flex justify-center'>
             <Image
-                src={autralian}
+                src={product.image ? product.image : autralian}
                 alt='australian'
                 width={200}
                 height={200}
-                 
             />
+          </div>
             <div className='block text-center p-4 space-y-4'>
                 <h2 className='font-light text-sm'>{product.title}</h2>
                 <p className='font-semibold text-sm'>${product.price}</p>
