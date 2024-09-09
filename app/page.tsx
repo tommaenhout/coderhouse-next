@@ -9,6 +9,9 @@ const Home : NextPage = async () => {
 
   const response = await fetch(`http://${process.env.VERCEL_URL}/api/all`, {
     cache: 'no-store',
+    headers: {
+      'Content-Type': 'application/json',
+    },
 });
 
 console.log(response)
