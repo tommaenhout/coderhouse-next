@@ -11,7 +11,11 @@ const Home : NextPage = async () => {
     cache: 'no-store',
 });
 
+console.log(response)
+
 const allProducts = await response.json();
+
+console.log(allProducts)
 
   return (
     <main className="flex flex-col items-center justify-center">
